@@ -31,7 +31,7 @@ mongod
 Depois, entre no diretório do backend e digite:
 
 ```sh
-npm run production
+npm run dev
 ```
 
 ### Para rodar o front-end
