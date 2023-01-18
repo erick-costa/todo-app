@@ -33,13 +33,6 @@ const About = (props) => (
       pretium justo. Nam luctus ligula a lacus volutpat, eget tempor nulla
       dignissim.
     </p>
-    <h2>Imprensa</h2>
-    <p>
-      Fusce a tincidunt tellus. Proin ornare mattis nisi, ut dictum ligula
-      blandit id. Nulla non ultricies velit. Donec ultricies at augue eget
-      hendrerit. Nullam et sem a tortor luctus facilisis quis quis nunc. Mauris
-      eu ligula augue. In id enim magna.
-    </p>
   </div>
 )
 
