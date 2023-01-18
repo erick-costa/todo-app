@@ -15,16 +15,23 @@ export default class Todo extends Component {
     this.handleRemove = this.handleRemove.bind(this)
     this.handleMarkAsDone = this.handleMarkAsDone.bind(this)
     this.handleMarkAsPending = this.handleMarkAsPending.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
 
     this.refresh()
   }
 
-  refresh() {
+  refresh(description = "") {
+    const search = description ? `&description__regex=/${description}/` : ""
+
     axios
-      .get(`${URL}?sort=-createdAt`)
+      .get(`${URL}?sort=-createdAt${search}`)
       .then((res) =>
-        this.setState({ ...this.state, description: "", list: res.data })
+        this.setState({ ...this.state, description, list: res.data })
       )
+  }
+
+  handleSearch() {
+    this.refresh(this.state.description)
   }
 
   handleChange(e) {
@@ -37,18 +44,20 @@ export default class Todo extends Component {
   }
 
   handleRemove(task) {
-    axios.delete(`${URL}/${task._id}`).then((res) => this.refresh())
+    axios
+      .delete(`${URL}/${task._id}`)
+      .then((res) => this.refresh(this.state.description))
   }
 
   handleMarkAsDone(task) {
     axios.put(`${URL}/${task._id}`, { ...task, done: true }).then((res) => {
-      this.refresh()
+      this.refresh(this.state.description)
     })
   }
 
   handleMarkAsPending(task) {
     axios.put(`${URL}/${task._id}`, { ...task, done: false }).then((res) => {
-      this.refresh()
+      this.refresh(this.state.description)
     })
   }
 
@@ -60,6 +69,7 @@ export default class Todo extends Component {
           description={this.state.description}
           handleAdd={this.handleAdd}
           handleChange={this.handleChange}
+          handleSearch={this.handleSearch}
         />
         <TodoList
           list={this.state.list}

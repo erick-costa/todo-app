@@ -8,13 +8,14 @@ const TodoForm = (props) => (
       <input
         id="description"
         className="form-control"
-        placeholder="Adicione uma tarefa"
+        placeholder="Digite uma tarefa"
         onChange={props.handleChange}
         value={props.description}
       />
     </Grid>
     <Grid cols="12 3 2">
       <IconButton theme="primary" icon="plus" onClick={props.handleAdd} />
+      <IconButton theme="info" icon="search" onClick={props.handleSearch} />
     </Grid>
   </div>
 )
